@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Create a Review</h4>
+<div class="col-6">
+  <form action="#" th:action="@{/review/create}" th:object="${review}" method="post">
+
+
+    <div class="form-group">
+      <!--<label for="name">Name</label>-->
+      <input class="form-control" type="date" th:field="${review.uploadDate}" placeholder="Upload Date" id="uploadDate" ><!--max="2020-01-01"-->
+      <span class="text-danger" th:if="${#fields.hasErrors('uploadDate')}" th:errors="*{uploadDate}">Date Error</span>
+    </div>
+
+    <div class="form-group">
+      <input class="form-control" type="text" th:field="${review.text}" placeholder="Text" id="text">
+      <span class="text-danger" th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Text Error</span>
+    </div>
+
+
+
+
+    <div class="form-group">
+      <!-- <label for="position">Position</label>-->
+      <select class="form-control" th:field="${review.conclusion}" id="conclusion">
+        <option value="">Select Conclusion</option>
+
+        <option th:each="conclusion : ${conclusion}" th:value="${conclusion}"
+                th:text="${conclusion}"></option>
+      </select>
+      <span class="text-danger" th:if="${#fields.hasErrors('conclusion')}" th:errors="*{conclusion}">Error</span>
+    </div>
+
+
+    <div class="form-group">
+      <select class="form-control" th:field="${review.reviewerIds}" id="reviewerIds" >
+        <option value="">Teacher</option>
+        <option th:each="reviewerIds : ${reviewerIds}"
+                th:value="${reviewerIds.id}" th:text="${reviewerIds.name}"></option>
+      </select>
+      <span class="text-danger" th:if="${#fields.hasErrors('reviewerIds')}" th:errors="*{reviewerIds}">Teacher Error</span>
+    </div>
+
+
+    <!---<div class="form-group">
+      <select class="form-control" th:field="${review.thesis}" id="thesis" >
+        <option value="">Thesis</option>
+        <option th:each="thesis : ${thesis}"
+                th:value="${thesis.id}" th:text="${thesis.title}"></option>
+      </select>
+      <span class="text-danger" th:if="${#fields.hasErrors('thesis')}" th:errors="*{thesis}">Thesis Error</span>
+    </div>-->
+
+
+    <button type="submit" class="btn btn-primary">Save Reviewe</button>
+  </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

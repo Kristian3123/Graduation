@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Students : </h4>
+<div class="col-6">
+
+    <h3 th:unless="${students} and ${students.size()}">There are no Students!</h3>
+
+    <a class="btn btn-info" href="students/create-student">Create Student</a>
+
+
+    <br><p>
+    <table th:if="${students.size() > 0}" class="table table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>FacultyNumber</th>
+
+   <!--         <th>Assignments</th>
+            <th>Thesis</th>
+            <th>Defense</th>-->
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.id}"></td>
+            <td th:text="${student.name}"></td>
+
+            <td th:text="${student.facultyNumber}"></td>
+       <!--    <td>
+               <ul>
+                   <li th:each="assignment : ${student.assignmentsIds}" th:text="${assignment.title}"></li>
+                   <li th:if="${#lists.isEmpty(student.assignmentsIds)}">N/A</li>
+               </ul>
+           </td>
+           <td>
+               <ul>
+                   <li th:each="thesis : ${student.thesisIds}" th:text="${thesis.title}"></li>
+                   <li th:if="${#lists.isEmpty(student.thesisIds)}">N/A</li>
+               </ul>
+           </td>
+           <td>
+               <ul>
+                   <li th:each="defense : ${student.defenses}" th:text="${defense.date}"></li>
+                   <li th:if="${#lists.isEmpty(student.defenses)}">N/A</li>
+               </ul>
+           </td>-->
+            <td>
+                <a class="btn btn-info" th:href="@{'/students/edit-student/' + ${student.id}}">Edit</a>
+                <a class="btn btn-danger" th:href="@{'/students/delete/' + ${student.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <tr>
+    <td>
+         <a class="btn btn-info" th:href="@{/students/graduates}">Graduates</a>
+        <!--<a class="btn btn-danger" th:href="@{/students}">Delete</a>-->
+    </td>
+    </tr>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

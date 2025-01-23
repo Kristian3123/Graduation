@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<h4>Thesis:</h4>
+<div class="col-6">
+    <h3 th:unless="${thesis} and ${thesis.size()}">There are no Thesis!</h3>
+
+    <a class="btn btn-info" href="thesis/create-thesis">Create Thesis</a>
+    <br><p>
+    <table th:if="${thesis.size() > 0}" class="table table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Upload Date</th>
+            <th>Review</th>
+           <!-- <th>Student</th>
+            <th>Assignment</th>
+            <th>Defense</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="thesis : ${thesis}">
+            <td th:text="${thesis.id}"></td>
+            <td th:text="${thesis.title}"></td>
+            <td th:text="${thesis.content}"></td>
+            <td th:text="${thesis.uploadDate}"></td>
+            <td  th:text="${thesis.review != null ? thesis.review.conclusion + ' (' + thesis.review.text + ')' : 'No review'}"></td>
+
+            <!--  <td th:text="${thesis.studentId != null ? thesis.studentId.name : 'N/A'}"></td>
+              <td th:text="${thesis.applicationId != null ? thesis.applicationId.title : 'N/A'}"></td>
+
+              <td th:text="${thesis.defense != null ? thesis.defense.date : 'N/A'}"></td>-->
+            <td>
+                <a class="btn btn-info" th:href="@{'/thesis/edit-thesis/' + ${thesis.id}}">Edit</a>
+                <a class="btn btn-danger" th:href="@{'/thesis/delete/' + ${thesis.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <tr>
+        <td>
+    <a class="btn btn-info" th:href="@{/thesis/negative-reviews}">View Negative Reviews Count</a>
+        </td>
+    </tr>
+
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<h4>Assignments:</h4>
+<div class="col-6">
+    <h3 th:unless="${DiplomaAssignment} and ${DiplomaAssignment.size()}">There are no Assignments!</h3>
+
+    <a class="btn btn-info" href="DiplomaAssignment/create-DiplomaAssignment">Create Assignment</a>
+    <br><p>
+    <table th:if="${DiplomaAssignment.size()>0}" class="table table-hover">
+        <th>Id</th>
+        <th>Title</th>
+        <th>Goal</th>
+        <th>Tasks</th>
+        <th>Technologies</th>
+    <th>Student</th>
+    <th>Supervisor</th>
+    <th>Status</th>
+
+    <tr th:each="diplomaAssignment : ${DiplomaAssignment}">
+        <td th:text="${diplomaAssignment.id}"></td>
+        <td th:text="${diplomaAssignment.title}"></td>
+        <td th:text="${diplomaAssignment.goal}"></td>
+        <td th:text="${diplomaAssignment.tasks}"></td>
+        <td th:text="${diplomaAssignment.technologies}"></td>
+
+      <!---->  <td th:text="${diplomaAssignment.studentIds != null ? diplomaAssignment.studentIds.name + ' (' + diplomaAssignment.studentIds.facultyNumber + ')' : 'No student'}"></td>
+
+        <td th:text="${diplomaAssignment.supervisorIds != null ? diplomaAssignment.supervisorIds.name : 'No supervisor'}"></td>
+
+
+
+        <td th:text="${diplomaAssignment.status}"></td>
+
+            <td><a class="btn btn-info" th:href="@{'/DiplomaAssignment/edit-DiplomaAssignment/'+${diplomaAssignment.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/DiplomaAssignment/delete/'+${diplomaAssignment.id}}">Delete</a></td>
+        </tr>
+    <tr>
+    <td><!--<a class="btn btn-info" th:href="@{'/DiplomaAssignment/approved-assignments'}">Approved Assignments</a></td>-->
+        <a class="btn btn-info" th:href="@{/DiplomaAssignment/approved-assignments(status=APPROVED)}">Approved Assignments</a>
+    </td>
+    <!--<td><a class="btn btn-info" th:href="@{/DiplomaAssignment/assignments-by-keyword}">Assignments by keyword</a></td>-->
+    <td>
+        <form th:action="@{/DiplomaAssignment/assignments-by-keyword}" method="get">
+            <input type="text" name="keyword" placeholder="Text">
+            <br><p>
+            <button type="submit">Serch</button>
+        </form>
+    </td>
+    <!--?supervisorId=1&status=APPROVED-->
+        <td>
+            <a class="btn btn-info" th:href="@{/DiplomaAssignment/assignments-by-supervisor-and-status(supervisorIds=2,status=APPROVED)}">Assignments by supervisor and status</a>
+            <!--status=PENDING
+            status=APPROVED
+            status=REJECTED
+            -->
+        </td>
+    </tr>
+    </table>
+    <br><p>
+
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

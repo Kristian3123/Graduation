@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<h4>Reviews:</h4>
+
+<div class="col-6">
+    <h3 th:unless="${review} and ${review.size()}">There are no Reviews!</h3>
+
+    <a class="btn btn-info" href="review/create-review">Create Review</a>
+    <br><p>
+    <table th:if="${review.size()>0}" class="table table-hover">
+        <th>Id</th>
+        <th>Upload Date</th>
+        <th>text</th>
+        <th>conclusion</th>
+        <th>Teacher</th>
+    <!-- <th>Thesis</th>-->
+         <tr th:each="review : ${review}">
+             <td th:text="${review.id}"></td>
+             <td th:text="${review.uploadDate}"></td>
+             <td th:text="${review.text}"></td>
+             <td th:text="${review.conclusion}"></td>
+             <td th:text="${review.reviewerIds.name}"></td>
+            <!-- <td th:text="${review.thesis}"></td>-->
+
+            <td><a class="btn btn-info" th:href="@{'/review/edit-review/'+${review.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/review/delete/'+${review.id}}">Delete</a></td>
+        </tr>
+    </table>
+
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration</title>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+</head>
+<body>
+<div class="container col-6">
+    <h1>Register</h1>
+    <!-- Role Selection -->
+    <form name="selectRole" id="roleForm">
+        <div class="form-group">
+            <label for="role">Select Role</label>
+            <select id="role" name="role" class="form-control" onchange="showForm()">
+                <option value="" disabled selected>Choose your role</option>
+                <option value="STUDENT">Student</option>
+                <option value="TEACHER">Teacher</option>
+            </select>
+        </div>
+    </form>
+
+    <!-- Student Registration Form -->
+    <form name="registerStudent" id="studentForm" th:action="@{/register}" method="post" style="display: none;">
+        <input type="hidden" name="role" value="STUDENT">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+        </div>
+        <div class="form-group">
+            <label for="facultyNumber">Faculty Number</label>
+            <input type="text" class="form-control" id="facultyNumber" name="facultyNumber" placeholder="Faculty Number">
+        </div>
+        <button type="submit" class="btn btn-primary">Register as Student</button>
+    </form>
+
+    <!-- Teacher Registration Form -->
+    <form name="registerTeacher" id="teacherForm" th:action="@{/register}" method="post" style="display: none;">
+        <input type="hidden" name="role" value="TEACHER">
+        <div class="form-group">
+            <label for="username1">Username</label>
+            <input type="text" class="form-control" id="username1" name="username" placeholder="Username" required>
+        </div>
+        <div class="form-group">
+            <label for="email1">Email</label>
+            <input type="email" class="form-control" id="email1" name="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <label for="password1">Password</label>
+            <input type="password" class="form-control" id="password1" name="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword1">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword1" name="confirmPassword" placeholder="Confirm Password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register as Teacher</button>
+    </form>
+</div>
+
+<script>
+    // Function to toggle visibility of forms based on role selection
+    function showForm() {
+        const role = document.getElementById("role").value;
+        document.getElementById("studentForm").style.display = role === "STUDENT" ? "block" : "none";
+        document.getElementById("teacherForm").style.display = role === "TEACHER" ? "block" : "none";
+    }
+</script>
+</body>
+</html>

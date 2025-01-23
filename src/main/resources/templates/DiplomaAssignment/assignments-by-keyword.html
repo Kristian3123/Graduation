@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+  <title>Approved Thesis Assignments</title>
+  <meta charset="UTF-8">
+  <link href="/static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+</head>
+<body>
+<h1>Assignments</h1>
+<div th:fragment="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/DiplomaAssignment">Assignments</a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+</div>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Goal</th>
+    <th>Technologies</th>
+    <th>Student</th>
+    <th>Supervisor</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="assignment : ${assignmentsByKeyword}">
+    <td th:text="${assignment.title}"></td>
+    <td th:text="${assignment.goal}"></td>
+    <td th:text="${assignment.technologies}"></td>
+    <!--<td th:text="${assignment.studentId}"></td>-->
+    <td th:text="${assignment.studentId != null ? assignment.studentId.name + ' (' + assignment.studentId.facultyNumber + ')' : 'No student'}"></td>
+    <!--<td th:text="${assignment.supervisorId}"></td>-->
+    <td th:text="${assignment.supervisorId != null ? assignment.supervisorId.name : 'No supervisor'}"></td>
+    <td th:text="${assignment.status}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
+
+
+
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+  <title>Search Thesis by Keyword</title>
+  <meta charset="UTF-8">
+  <link href="/static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+</head>
+<body>
+<h2>Thesis Search by Keyword</h2>
+<div th:fragment="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/DiplomaAssignment">Assignments</a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+
+<form method="get" th:action="@{/DiplomaAssignment/search-keyword}">
+  <input type="text" name="keyword" placeholder="Enter keyword" />
+  <button type="submit">Search</button>
+</form>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Goal</th>
+    <th>Technologies</th>
+    <th>Student</th>
+    <th>Supervisor</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="assignment : ${assignmentsByKeyword}">
+    <td th:text="${assignment.title}"></td>
+    <td th:text="${assignment.goal}"></td>
+    <td th:text="${assignment.technologies}"></td>
+
+    <td th:text="${assignment.studentId != null ? assignment.studentId.name + ' (' + assignment.studentId.facultyNumber + ')' : 'No student'}"></td>
+
+    <td th:text="${assignment.supervisorId != null ? assignment.supervisorId.name : 'No supervisor'}"></td>
+    <td th:text="${assignment.status}"></td>
+  </tr>
+  </tbody>
+</table>
+
+<footer page-footer font-small>
+
+</footer>
+</body>
+</html>-->

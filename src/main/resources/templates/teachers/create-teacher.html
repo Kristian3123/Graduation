@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: navigation"></header>
+<h4>Register a Teacher</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/teachers/create}" th:object="${teacher}" method="post">
+
+        <div class="form-group">
+            <!--<label for="name">Name</label>-->
+            <input class="form-control" type="text" th:field="${teacher.name}" placeholder="Name" id="name">
+            <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" type="text" th:field="${teacher.email}" placeholder="Email" id="nemail">
+            <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
+            <!--<label for="email">Email</label>-->
+            <!--  <select class="form-control" th:field="${teacher.email}" id="email">
+                -- <option value="">Email</option>
+                   <option th:each="email : ${emails}" th:value="${email}" th:text="${email}"></option>
+               </select>-->
+         </div>
+
+         <div class="form-group">
+             <!-- <label for="position">Position</label>-->
+              <select class="form-control" th:field="${teacher.position}" id="position">
+                   <option value="">Select Position</option>
+                   <!--<option value="ASSISTANT">Assistant</option>
+                   <option value="CHIEF_ASSISTANT">Chief Assistant</option>
+                   <option value="DOCTOR">Doctor</option>
+                   <option value="PROFESSOR">Professor</option>-->
+                  <option th:each="position : ${position}" th:value="${position}"
+                          th:text="${position}"></option>
+              </select>
+             <span class="text-danger" th:if="${#fields.hasErrors('position')}" th:errors="*{position}">Error</span>
+          </div>
+
+        <!--<div class="form-group">
+
+             <select class="form-control" th:field="${teacher.supervisedAssignmentIds}" id="supervisedAssignmentIds" >
+                 <option value="">SupervisedAssignment</option>
+
+                   <option th:each="supervisedAssignmentIds : ${supervisedAssignmentIds}"
+                           th:value="${supervisedAssignmentIds.id}" th:text="${supervisedAssignmentIds.title}"></option>
+               </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('supervisedAssignmentIds')}" th:errors="*{supervisedAssignmentIds}">Supervised Assignment Error</span>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <select class="form-control" th:field="${teacher.defensesIds}" id="defensesIds" >
+                <option value="">Defense</option>
+                <option th:each="defensesIds : ${defensesIds}"
+                        th:value="${defensesIds.id}" th:text="${defensesIds.date}"></option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('defensesIds')}" th:errors="*{defensesIds}">Defense Error</span>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <select class="form-control" th:field="${teacher.review}" id="review" >
+                <option value="">Review</option>
+                <option th:each="review : ${review}"
+                        th:value="${review.id}" th:text="${review.conclusion}"></option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('review')}" th:errors="*{review}">Review Error</span>
+        </div>-->
+
+
+
+          <button type="submit" class="btn btn-primary">Save Teacher</button>
+      </form>
+  </div>
+  <footer th:replace="fragments :: footer"></footer>
+  </body>
+  </html>

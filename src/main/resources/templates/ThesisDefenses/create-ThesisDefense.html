@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<h4>Create Thesis Defense</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/ThesisDefenses/create}" th:object="${ThesisDefense}" method="post">
+        <div class="form-group">
+            <!--<label for="name">Name</label>-->
+            <input class="form-control" type="date" th:field="${ThesisDefense.date}" placeholder="Date" id="date">
+            <span class="text-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date Error</span>
+        </div>
+
+
+        <div class="form-group">
+            <select class="form-control" th:field="${ThesisDefense.committeeIds}" id="committeeIds" >
+                <option value="">Teacher</option>
+
+                <option th:each="committeeIds : ${committeeIds}"
+                        th:value="${committeeIds.id}" th:text="${committeeIds.name}"></option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('committeeIds')}" th:errors="*{committeeIds}">Teacher Error</span>
+        </div>
+
+       <!----> <div class="form-group">
+            <select class="form-control" th:field="${ThesisDefense.studentIds}" id="studentIds" >
+                <option value="">Student</option>
+
+                <option th:each="studentIds : ${studentIds}"
+                        th:value="${studentIds.id}" th:text="${studentIds.name}+ '  ' + ${studentIds.facultyNumber}"></option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('studentIds')}" th:errors="*{studentIds}">Student Error</span>
+        </div>
+
+       <!-- <div class="form-group">
+            <select class="form-control" th:field="${ThesisDefense.thesisId}" id="thesisId" >
+                <option value="">Thesis</option>
+
+                <option th:each="thesisId : ${thesisId}"
+                        th:value="${thesisId.id}" th:text="${thesisId.date}"></option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('thesisId')}" th:errors="*{thesisId}">Defense Error</span>
+        </div>-->
+
+
+
+
+        <div class="form-group">
+            <!--<label for="name">Name</label>-->
+            <input class="form-control" type="text" th:field="${ThesisDefense.grade}" placeholder="Grade" id="grade">
+            <span class="text-danger" th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}">Name Error</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Thesis Defense</button>
+    </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org" >
+<head th:fragment="head">
+    <title>Graduation</title>
+    <meta charset="UTF-8">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+</head>
+<header th:fragment="header-nav">
+    <!--<h1>Graduation Management System</h1>-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/teachers">Teacher</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/students">Students</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/DiplomaAssignment">Assignment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ThesisDefenses">Defense</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/review">Review</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/thesis">Thesis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/User">User</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<footer page-footer font-small>
+   <!-- <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="#"> School Management System</a>
+    </div>-->
+</footer>
+
+</html>

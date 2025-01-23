@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Edit the Thesis</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/thesis/update/{id}(id=${id})}" th:object="${thesis}" method="post">
+
+
+        <div class="form-group">
+            <!--<label for="name">Name</label>-->
+            <input class="form-control" type="text" th:field="${thesis.title}" placeholder="Title" id="title" ><!--max="2020-01-01"-->
+            <span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</span>
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" type="text" th:field="${thesis.content}" placeholder="Content" id="content">
+            <span class="text-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Content Error</span>
+        </div>
+
+        <div class="form-group">
+            <!--<label for="name">Name</label>-->
+            <input class="form-control" type="date" th:field="${thesis.uploadDate}" placeholder="Upload Date" id="uploadDate" ><!--max="2020-01-01"-->
+            <span class="text-danger" th:if="${#fields.hasErrors('uploadDate')}" th:errors="*{uploadDate}">Date Error</span>
+        </div>
+
+
+        <div class="form-group">
+            <select class="form-control" th:field="${thesis.review}" id="review">
+                <option value="">Select Review</option>
+                <option th:each="review : ${review}" th:value="${review.id}"
+                        th:text="${review.conclusion}+ ' - ' + ${review.text}"></option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('review')}" th:errors="*{review}">Review Error</span>
+        </div>
+
+
+
+        <!--<div class="form-group">
+            <select class="form-control" th:field="${thesis.studentId}" id="studentId">
+                <option value="">Student</option>
+
+                <option th:each="studentId : ${studentId}" th:value="${studentId.id}"
+                        th:text="${studentId.name}"></option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('studentId')}" th:errors="*{studentId}">Student Error</span>
+        </div>
+
+        <div class="form-group">
+            <select class="form-control" th:field="${thesis.applicationId}" id="applicationId" >
+                <option value="">Assignment</option>
+                <option th:each="applicationId : ${applicationId}"
+                        th:value="${applicationId.id}" th:text="${applicationId.title}"></option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('applicationId')}" th:errors="*{applicationId}">Assignment Error</span>
+        </div>
+
+        <div class="form-group">
+            <select class="form-control" th:field="${thesis.defense}" id="defense" >
+                <option value="">Defense</option>
+                <option th:each="defense : ${defense}"
+                        th:value="${defense.id}" th:text="${defense.date}"></option>
+            </select>
+            <span class="text-danger" th:if="${#fields.hasErrors('defense')}" th:errors="*{defense}">Defense Error</span>
+        </div>-->
+
+
+
+        <button type="submit" class="btn btn-primary">Update Thesis</button>
+    </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

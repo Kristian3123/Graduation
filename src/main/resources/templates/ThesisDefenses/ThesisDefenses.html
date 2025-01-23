@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<h4>Defense:</h4>
+<div class="col-6">
+    <h3 th:unless="${ThesisDefenses} and ${ThesisDefenses.size()}">There are no Thesis Defense!</h3>
+
+        <a class="btn btn-info" href="ThesisDefenses/create-ThesisDefense">Create Thesis Defense</a>
+    <br><p>
+    <table th:if="${ThesisDefenses.size()>0}" class="table table-hover">
+        <th>Id</th>
+        <th>Date</th>
+        <th>Teachers</th>
+        <th>Student</th>
+    <!-- <th>Thesis</th>-->
+        <th>Grade</th>
+        <tr th:each="ThesisDefense : ${ThesisDefenses}">
+            <td th:text="${ThesisDefense.id}"></td>
+            <td th:text="${ThesisDefense.date}"></td>
+            <!--<td th:text="${ThesisDefense.committeeIds}"></td>-->
+            <td>
+                <ul>
+                    <li th:each="committeeIds : ${ThesisDefense.committeeIds}" th:text="${committeeIds.name}"></li>
+                    <li th:if="${#lists.isEmpty(ThesisDefense.committeeIds)}">N/A</li>
+                </ul>
+            </td>
+
+            <!--<td th:text="${ThesisDefense.studentIds}"></td>-->
+            <td>
+                <ul>
+                    <li th:each="studentIds : ${ThesisDefense.studentIds}" th:text="${studentIds.name}+ ' (' + ${studentId.facultyNumber}') '"></li>
+                    <li th:if="${#lists.isEmpty(ThesisDefense.studentIds)}">N/A</li>
+                </ul>
+            </td>
+
+            <!--<td th:text="${ThesisDefense.thesisId}"></td>
+            <td>
+                <ul>
+                    <li th:each="thesisId : ${ThesisDefense.thesisId}" th:text="${thesisId.title}"></li>
+                    <li th:if="${#lists.isEmpty(ThesisDefense.thesisId)}">N/A</li>
+                </ul>
+            </td>-->
+
+
+            <td th:text="${ThesisDefense.grade}"></td>
+
+            <td><a class="btn btn-info" th:href="@{'/ThesisDefenses/edit-ThesisDefense/'+${ThesisDefense.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/ThesisDefenses/delete/'+${ThesisDefense.id}}">Delete</a></td>
+        </tr>
+    </table>
+    <tr>
+        <td>
+    <a class="btn btn-info"  th:href="@{/ThesisDefenses/defended-theses}">Defended Theses by Grade</a>
+    <a class="btn btn-info"  th:href="@{/ThesisDefenses/average-defenses}">Average Defenses by Period</a>
+    <a class="btn btn-info"  th:href="@{/ThesisDefenses/successful-defenses/{professorId}}">Successful Defenses by Supervisor</a>
+        </td>
+    </tr>
+
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

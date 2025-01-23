@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Teachers:</h4>
+<div class="col-6">
+    <h3 th:unless="${teachers} and ${teachers.size()}">There are no Teachers!</h3>
+
+    <a class="btn btn-info" href="teachers/create-teacher">Create Teacher</a>
+    <br><p>
+    <table th:if="${teachers.size()>0}" class="table table-hover">
+
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Position</th>
+    <!--<th>SupervisedAssignments</th>
+    <th>Defense</th>
+<th>Review</th>-->
+
+    <tr th:each="teacher : ${teachers}">
+        <td th:text="${teacher.id}"></td>
+        <td th:text="${teacher.name}"></td>
+        <td th:text="${teacher.email}"></td>
+        <td th:text="${teacher.position}"></td>
+    <!--<td th:text="${teacher.supervisedAssignmentIds.title}"></td>
+             <td>
+                <ul>
+                    <li th:each="assignment : ${teacher.supervisedAssignmentIds}">
+                        <span th:text=" ${assignment.title}"></span>
+                    </li>
+                </ul>
+            </td>-->
+    <!--<td th:text="${teacher.defensesIds.date}"></td>
+            <td>
+                <ul>
+                    <li th:each="defense : ${teacher.defensesIds}">
+                        <span th:text=" ${defense.date} "></span>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li th:each="review : ${teacher.review}">
+                        <span th:text=" ${review.conclusion} "></span>
+                    </li>
+                </ul>
+            </td>-->
+
+
+            <td><a class="btn btn-info" th:href="@{'/teachers/edit-teacher/'+${teacher.id}}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/teachers/delete/'+${teacher.id}}">Delete</a></td>
+        </tr>
+    </table>
+
+
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
